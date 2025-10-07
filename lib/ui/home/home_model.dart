@@ -11,7 +11,7 @@ class UnsplashImage {
   String? description;
   User? user;
   List<CurrentUserCollections>? currentUserCollections;
-
+  bool? isliked;
   Urls? urls;
   Links? links;
 
@@ -28,6 +28,7 @@ class UnsplashImage {
     this.description,
     this.user,
     this.currentUserCollections,
+    this.isliked,
     this.urls,
     this.links,
   });
