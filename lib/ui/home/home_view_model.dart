@@ -7,7 +7,6 @@ class HomeViewModel extends ChangeNotifier {
   List<UnsplashImage> images = [];
 
   bool isloading = false;
- 
 
   HomeViewModel() {
     print("@homeViewModel constructor call!");
@@ -47,8 +46,13 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleliked({required int index}){
-    images[index].isliked =! (images[index].isliked ?? false);
+  void toggleliked({required int index}) {
+    images[index].isliked = !(images[index].isliked ?? false);
+    notifyListeners();
+  }
+
+  addcomment({required String comment, required int index}) {
+    images[index].commentsList?.add(comment);
     notifyListeners();
   }
 }

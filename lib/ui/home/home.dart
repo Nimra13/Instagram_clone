@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:instagram_project/ui/home/comment_box.dart';
 import 'package:instagram_project/ui/home/home_model.dart';
-import 'package:instagram_project/ui/home/home_services.dart';
 import 'package:instagram_project/ui/home/home_view_model.dart';
 import 'package:instagram_project/ui/home/post_details.dart';
 import 'package:provider/provider.dart';
@@ -102,9 +102,13 @@ class HomePage extends StatelessWidget {
 }
 
 class CustomColumnWidget extends StatelessWidget {
-  const CustomColumnWidget({required this.image,required this.index, super.key});
+  const CustomColumnWidget({
+    required this.image,
+    required this.index,
+    super.key,
+  });
   final UnsplashImage image;
-final int index;
+  final int index;
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeViewModel>(
@@ -170,11 +174,9 @@ final int index;
                             ),
                   ),
                   20.horizontalSpace,
-                  Icon(
-                    Icons.comment_outlined,
-                    color: Colors.white,
-                    size: 30.sp,
-                  ),
+                  CustomCommentBox(
+                    image: image,
+                    index: index,),
                   20.horizontalSpace,
                   Icon(
                     Icons.ios_share_outlined,
@@ -189,3 +191,5 @@ final int index;
     );
   }
 }
+
+
