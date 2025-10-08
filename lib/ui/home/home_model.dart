@@ -14,6 +14,7 @@ class UnsplashImage {
   bool? isliked;
   Urls? urls;
   Links? links;
+  List<String>? commentsList = [];
 
   UnsplashImage({
     this.id,
@@ -31,6 +32,7 @@ class UnsplashImage {
     this.isliked,
     this.urls,
     this.links,
+     this.commentsList,
   });
 
   UnsplashImage.fromJson(Map<String, dynamic> json) {
