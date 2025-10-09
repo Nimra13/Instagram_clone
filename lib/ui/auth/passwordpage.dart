@@ -61,7 +61,7 @@ class PasswordPage extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  
+
                   CustomTextField(
                     controller: confirmPasswordController,
                     email: 'Re Enter Password',
@@ -81,7 +81,9 @@ class PasswordPage extends StatelessWidget {
                   ),
                   30.verticalSpace,
                   CustomElevatedButton(
+                    color: Colors.black,
                     text: 'Resest Password',
+                    textcolor: Colors.white,
                     onPressed: () {
                       print(
                         "Password: ${passwordController.text} C.Password: ${confirmPasswordController.text}",
@@ -91,7 +93,6 @@ class PasswordPage extends StatelessWidget {
                         Get.to(() => LoginPage());
                       }
                     },
-                    formKey: formKey,
                   ),
                   30.verticalSpace,
                 ],
