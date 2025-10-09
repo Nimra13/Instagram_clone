@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:instagram_project/ui/account/account_page.dart';
 import 'package:instagram_project/ui/home/comment_box.dart';
 import 'package:instagram_project/ui/home/home_model.dart';
 import 'package:instagram_project/ui/home/home_view_model.dart';
@@ -18,6 +19,7 @@ class HomePage extends StatelessWidget {
         builder:
             (context, model, child) => Scaffold(
               backgroundColor: Colors.black,
+              bottomNavigationBar: CustomBottomBar(),
               body: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.w),
                 child: Column(
@@ -101,6 +103,37 @@ class HomePage extends StatelessWidget {
   }
 }
 
+class CustomBottomBar extends StatelessWidget {
+  const CustomBottomBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      backgroundColor: Colors.black12,
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: GestureDetector(
+            onTap: () {
+              Get.to(() => HomePage());
+            },
+            child: Icon(Icons.home_outlined, color: Colors.white, size: 30.sp),
+          ),
+          label: '',
+        ),
+        BottomNavigationBarItem(
+          icon: GestureDetector(
+            onTap: () {
+              Get.to(() => AccountPage());
+            },
+            child: Icon(Icons.account_circle, color: Colors.white, size: 30.sp),
+          ),
+          label: '',
+        ),
+      ],
+    );
+  }
+}
+
 class CustomColumnWidget extends StatelessWidget {
   const CustomColumnWidget({
     required this.image,
@@ -174,9 +207,7 @@ class CustomColumnWidget extends StatelessWidget {
                             ),
                   ),
                   20.horizontalSpace,
-                  CustomCommentBox(
-                    image: image,
-                    index: index,),
+                  CustomCommentBox(image: image, index: index),
                   20.horizontalSpace,
                   Icon(
                     Icons.ios_share_outlined,
@@ -191,5 +222,3 @@ class CustomColumnWidget extends StatelessWidget {
     );
   }
 }
-
-

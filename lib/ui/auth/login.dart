@@ -40,7 +40,7 @@ class LoginPage extends StatelessWidget {
                   10.verticalSpace,
                   CustomTextField(
                     email: 'Password',
-                    
+
                     icon: Icon(Icons.lock_outlined),
                     validator: (value) {
                       if (value == null || value.isEmpty || value.length <= 8) {
@@ -69,8 +69,9 @@ class LoginPage extends StatelessWidget {
                   ),
                   30.verticalSpace,
                   CustomElevatedButton(
-                    formKey: formKey,
+                    color: Colors.black,
                     text: 'Log In',
+                    textcolor: Colors.white,
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
                         formKey.currentState?.save();
@@ -119,23 +120,25 @@ class CustomElevatedButton extends StatelessWidget {
   const CustomElevatedButton({
     required this.text,
     required this.onPressed,
+    required this.color,
+    required this.textcolor,
     super.key,
-    required this.formKey,
   });
 
-  final GlobalKey<FormState> formKey;
   final String text;
   final dynamic onPressed;
+  final Color color;
+  final Color textcolor;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.black,
+        backgroundColor: color,
         shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(3.r)),
         fixedSize: Size(330.w, 55.h),
       ),
       onPressed: onPressed,
-      child: Text(text, style: TextStyle(color: Colors.white, fontSize: 18.sp)),
+      child: Text(text, style: TextStyle(color: textcolor, fontSize: 18.sp)),
     );
   }
 }

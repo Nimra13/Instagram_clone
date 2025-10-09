@@ -7,7 +7,6 @@ import 'package:instagram_project/ui/home/home.dart';
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
-
   @override
   State<SignUpPage> createState() => _SignUpPageState();
 }
@@ -87,14 +86,15 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   20.verticalSpace,
                   CustomElevatedButton(
+                    color: Colors.black,
                     text: 'Sign Up',
+                    textcolor: Colors.white,
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
                         formKey.currentState?.save();
                         Get.to(() => HomePage());
                       }
                     },
-                    formKey: formKey,
                   ),
                   10.verticalSpace,
                   RichText(
