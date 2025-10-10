@@ -55,4 +55,6 @@ class HomeViewModel extends ChangeNotifier {
     images[index].commentsList?.add(comment);
     notifyListeners();
   }
+
+  
 }

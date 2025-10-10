@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:instagram_project/ui/account/account_page.dart';
 import 'package:instagram_project/ui/home/comment_box.dart';
+import 'package:instagram_project/ui/post/create_post.dart';
 import 'package:instagram_project/ui/home/home_model.dart';
 import 'package:instagram_project/ui/home/home_view_model.dart';
 import 'package:instagram_project/ui/home/post_details.dart';
@@ -49,7 +50,7 @@ class HomePage extends StatelessWidget {
                           alignment: Alignment.bottomRight,
                           children: [
                             CircleAvatar(
-                              backgroundColor: Colors.grey,
+                              backgroundImage: AssetImage('images/face.png'),
                               radius: 50.r,
                             ),
                             Container(
@@ -117,6 +118,16 @@ class CustomBottomBar extends StatelessWidget {
               Get.to(() => HomePage());
             },
             child: Icon(Icons.home_outlined, color: Colors.white, size: 30.sp),
+          ),
+          label: '',
+        ),
+        BottomNavigationBarItem(
+          icon: GestureDetector(
+            onTap: () {
+              Get.to(() => CreatePost());
+              // model.pickImage();
+            },
+            child: Icon(Icons.image_outlined, color: Colors.white, size: 30.sp),
           ),
           label: '',
         ),
