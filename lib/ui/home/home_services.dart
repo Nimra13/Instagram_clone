@@ -21,6 +21,7 @@ class UnsplashImageServices {
         List<dynamic> myJson = json.decode(response.body);
         images =
             myJson
+            
                 .map<UnsplashImage>((j) => UnsplashImage.fromJson(j))
                 .toList();
 
