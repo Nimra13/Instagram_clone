@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 
 class HomeViewModel extends ChangeNotifier {
   List<UnsplashImage> images = [];
+  List<UnsplashImage> savedPosts = [];
 
   bool isloading = false;
-
   HomeViewModel() {
     print("@homeViewModel constructor call!");
     fetchImages();
@@ -41,7 +41,6 @@ class HomeViewModel extends ChangeNotifier {
 
       throw Exception('failed to load');
     }
-
     isloading = false;
     notifyListeners();
   }
@@ -53,6 +52,13 @@ class HomeViewModel extends ChangeNotifier {
 
   addcomment({required String comment, required int index}) {
     images[index].commentsList?.add(comment);
+    notifyListeners();
+  }
+
+  savePost({required int index}) {
+    print('@savePost $index');
+    images[index].issaved = !(images[index].issaved ?? false);
+    savedPosts.add(images[index]);
     notifyListeners();
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:instagram_project/ui/account/account_page.dart';
 import 'package:instagram_project/ui/home/comment_box.dart';
+import 'package:instagram_project/ui/post/create_post.dart';
 import 'package:instagram_project/ui/home/home_model.dart';
 import 'package:instagram_project/ui/home/home_view_model.dart';
 import 'package:instagram_project/ui/home/post_details.dart';
@@ -13,92 +14,86 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => HomeViewModel(),
-      child: Consumer<HomeViewModel>(
-        builder:
-            (context, model, child) => Scaffold(
-              backgroundColor: Colors.black,
-              bottomNavigationBar: CustomBottomBar(),
-              body: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.w),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    40.verticalSpace,
-                    Row(
-                      children: [
-                        Image.asset(
-                          'images/logo.png',
-                          color: Colors.white,
-                          width: 150.w,
-                        ),
-                        140.horizontalSpace,
-                        Icon(
-                          Icons.favorite_border_outlined,
-                          color: Colors.white,
-                        ),
-                        20.horizontalSpace,
-                        Icon(Icons.messenger, color: Colors.white),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Stack(
-                          alignment: Alignment.bottomRight,
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.grey,
-                              radius: 50.r,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
-                              ),
-                              child: Icon(
-                                Icons.add,
-                                size: 35.sp,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                        6.verticalSpace,
-                        Text(
-                          textAlign: TextAlign.center,
-                          'Your Story',
-                          style: TextStyle(
-                            color: Color(0xffAEA9A9),
-                            fontWeight: FontWeight.w500,
+    return Consumer<HomeViewModel>(
+      builder:
+          (context, model, child) => Scaffold(
+            backgroundColor: Colors.black,
+            bottomNavigationBar: CustomBottomBar(),
+            body: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  40.verticalSpace,
+                  Row(
+                    children: [
+                      Image.asset(
+                        'images/logo.png',
+                        color: Colors.white,
+                        width: 150.w,
+                      ),
+                      140.horizontalSpace,
+                      Icon(Icons.favorite_border_outlined, color: Colors.white),
+                      20.horizontalSpace,
+                      Icon(Icons.messenger, color: Colors.white),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Stack(
+                        alignment: Alignment.bottomRight,
+                        children: [
+                          CircleAvatar(
+                            backgroundImage: AssetImage('images/face.png'),
+                            radius: 50.r,
                           ),
-                        ),
-                      ],
-                    ),
-                    25.verticalSpace,
-                    model.isloading
-                        ? Center(
-                          child: CircularProgressIndicator(color: Colors.white),
-                        )
-                        : Expanded(
-                          child: ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemCount: model.images.length,
-                            itemBuilder: (context, index) {
-                              return CustomColumnWidget(
-                                image: model.images[index],
-                                index: index,
-                              );
-                            },
+                          Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white,
+                            ),
+                            child: Icon(
+                              Icons.add,
+                              size: 35.sp,
+                              color: Colors.black,
+                            ),
                           ),
+                        ],
+                      ),
+                      6.verticalSpace,
+                      Text(
+                        textAlign: TextAlign.center,
+                        'Your Story',
+                        style: TextStyle(
+                          color: Color(0xffAEA9A9),
+                          fontWeight: FontWeight.w500,
                         ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                  25.verticalSpace,
+                  model.isloading
+                      ? Center(
+                        child: CircularProgressIndicator(color: Colors.white),
+                      )
+                      : Expanded(
+                        child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: model.images.length,
+                          itemBuilder: (context, index) {
+                            return CustomColumnWidget(
+                              image: model.images[index],
+                              index: index,
+                            );
+                          },
+                        ),
+                      ),
+                ],
               ),
             ),
-      ),
+          ),
     );
   }
 }
@@ -117,6 +112,16 @@ class CustomBottomBar extends StatelessWidget {
               Get.to(() => HomePage());
             },
             child: Icon(Icons.home_outlined, color: Colors.white, size: 30.sp),
+          ),
+          label: '',
+        ),
+        BottomNavigationBarItem(
+          icon: GestureDetector(
+            onTap: () {
+              Get.to(() => CreatePost());
+              // model.pickImage();
+            },
+            child: Icon(Icons.image_outlined, color: Colors.white, size: 30.sp),
           ),
           label: '',
         ),
@@ -213,6 +218,24 @@ class CustomColumnWidget extends StatelessWidget {
                     Icons.ios_share_outlined,
                     color: Colors.white,
                     size: 30.sp,
+                  ),
+                  Spacer(),
+                  GestureDetector(
+                    onTap: () {
+                      model.savePost(index: index);
+                    },
+                    child:
+                        model.images[index].issaved ?? false
+                            ? Icon(
+                              Icons.bookmark,
+                              color: Colors.white,
+                              size: 30.sp,
+                            )
+                            : Icon(
+                              Icons.bookmark_add_outlined,
+                              color: Colors.white,
+                              size: 30.sp,
+                            ),
                   ),
                 ],
               ),
