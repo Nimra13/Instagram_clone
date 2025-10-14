@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:instagram_project/ui/account/saved_post.dart';
 import 'package:instagram_project/ui/auth/login.dart';
 import 'package:instagram_project/ui/home/home.dart';
+import 'package:instagram_project/ui/post/my_post.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
@@ -47,9 +49,14 @@ class AccountPage extends StatelessWidget {
               ],
             ),
             40.verticalSpace,
-            AccountInfoData(
-              icon: Icons.account_circle_outlined,
-              text: 'My Account',
+            GestureDetector(
+              onTap: () {
+                Get.to(() => MyPost());
+              },
+              child: AccountInfoData(
+                icon: Icons.account_circle_outlined,
+                text: 'My Account',
+              ),
             ),
             15.verticalSpace,
             AccountInfoData(
@@ -67,6 +74,16 @@ class AccountPage extends StatelessWidget {
             AccountInfoData(
               icon: Icons.chat_bubble_outline,
               text: 'Chat Support',
+            ),
+            15.verticalSpace,
+            GestureDetector(
+              onTap: () {
+                Get.to(() => SavedPost());
+              },
+              child: AccountInfoData(
+                icon: Icons.bookmark_add_outlined,
+                text: 'Saved',
+              ),
             ),
             30.verticalSpace,
 

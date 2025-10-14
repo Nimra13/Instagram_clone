@@ -12,6 +12,7 @@ class UnsplashImage {
   User? user;
   List<CurrentUserCollections>? currentUserCollections;
   bool? isliked;
+  bool? issaved;
   Urls? urls;
   Links? links;
   List<String>? commentsList = [];
@@ -30,9 +31,10 @@ class UnsplashImage {
     this.user,
     this.currentUserCollections,
     this.isliked,
+    this.issaved,
     this.urls,
     this.links,
-     this.commentsList,
+    this.commentsList,
   });
 
   UnsplashImage.fromJson(Map<String, dynamic> json) {
