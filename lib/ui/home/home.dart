@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:instagram_project/firestore/firebase_storage.dart';
+import 'package:instagram_project/firestore/firestore_list_screen.dart';
 import 'package:instagram_project/ui/account/account_page.dart';
 import 'package:instagram_project/ui/home/comment_box.dart';
 import 'package:instagram_project/ui/post/create_post.dart';
@@ -62,12 +64,17 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                       6.verticalSpace,
-                      Text(
-                        textAlign: TextAlign.center,
-                        'Your Story',
-                        style: TextStyle(
-                          color: Color(0xffAEA9A9),
-                          fontWeight: FontWeight.w500,
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(() => FirestoreScreen());
+                        },
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          'Your Story',
+                          style: TextStyle(
+                            color: Color(0xffAEA9A9),
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ],
@@ -214,10 +221,15 @@ class CustomColumnWidget extends StatelessWidget {
                   20.horizontalSpace,
                   CustomCommentBox(image: image, index: index),
                   20.horizontalSpace,
-                  Icon(
-                    Icons.ios_share_outlined,
-                    color: Colors.white,
-                    size: 30.sp,
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => UploadImage());
+                    },
+                    child: Icon(
+                      Icons.ios_share_outlined,
+                      color: Colors.white,
+                      size: 30.sp,
+                    ),
                   ),
                   Spacer(),
                   GestureDetector(

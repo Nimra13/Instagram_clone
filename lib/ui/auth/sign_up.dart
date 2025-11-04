@@ -92,7 +92,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
                         formKey.currentState?.save();
-                        Get.to(() => HomePage());
+                        Get.offAll(() => HomePage());
                       }
                     },
                   ),
