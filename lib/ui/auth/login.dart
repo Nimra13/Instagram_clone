@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:instagram_project/ui/auth/passwordpage.dart';
-import 'package:instagram_project/ui/auth/signup.dart';
+import 'package:instagram_project/ui/auth/password_page.dart';
+import 'package:instagram_project/ui/auth/sign_up.dart';
 import 'package:instagram_project/ui/home/home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
   final formKey = GlobalKey<FormState>();
+
+  // late SharedPreferences prefs;
+  bool isLoggedIn = false;
+
+  Future<void> userLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isLoggedIn', true);
+    Get.offAll(() => HomePage());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +85,7 @@ class LoginPage extends StatelessWidget {
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
                         formKey.currentState?.save();
-                        Get.to(() => HomePage());
+                        userLoggedIn();
                       }
                     },
                   ),

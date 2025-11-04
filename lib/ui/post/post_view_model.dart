@@ -5,7 +5,6 @@ import 'package:instagram_project/ui/post/post_model.dart';
 class UserProfileViewModel extends ChangeNotifier {
   XFile? pickedImage;
   List<Post> userPosts = [];
-
   pickImage() async {
     final imagePicker = ImagePicker();
     final pickedFile = await imagePicker.pickImage(source: ImageSource.gallery);
@@ -22,4 +21,6 @@ class UserProfileViewModel extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+
 

@@ -5,9 +5,16 @@ import 'package:instagram_project/ui/account/saved_post.dart';
 import 'package:instagram_project/ui/auth/login.dart';
 import 'package:instagram_project/ui/home/home.dart';
 import 'package:instagram_project/ui/post/my_post.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
+
+  Future<void> userLogOut() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isLoggedIn', false);
+    Get.offAll(() => LoginPage());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +105,8 @@ class AccountPage extends StatelessWidget {
             CustomElevatedButton(
               text: 'Log Out',
               onPressed: () {
-                Get.to(() => LoginPage());
+                userLogOut();
+                // Get.to(() => LoginPage());
               },
               color: Colors.white,
               textcolor: Colors.black,
